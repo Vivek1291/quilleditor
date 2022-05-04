@@ -48,7 +48,7 @@ export function CreateIcon(props) {
   function renderView() {
     switch(selectedView) {
       case 'image': 
-        return <img src={Image} alt = "" />
+        return <img style={{maxWidth: '100%'}} src={Image} alt = "" />
       case 'text':
         return <QuillEditor />
       default:
