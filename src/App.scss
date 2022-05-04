@@ -1,0 +1,33 @@
+  .App {
+
+    .side-bar-container {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 250px;
+      border-right: 1px solid #000;
+      height: 100vh;
+      float: left;
+    }
+    .body-content {
+      width: calc(100% - 271px);
+      float: right;
+      padding-left: 20px;
+    }
+  }
+ul {
+  list-style: none;
+  padding: 0;
+}
+.flex {
+  display: flex;
+}
+.space-between {
+  justify-content: space-between;
+}
+.vertical-align {
+  align-items: center;
+}
+.font-12 {
+  font-size: 12px;
+}
