@@ -39,33 +39,49 @@ export function CreateContent(props) {
 export function CreateIcon(props) {
   const [toggle, setToggle] = useState(false);
   const [selectedView, setSelectedView ] = useState('');
+  const [quillCollection, setQuillCollection] = useState([]);
 
   function handleView(key) {
     setSelectedView(key);
+    if(key === 'text') {
+      let data = [...quillCollection], editor = <QuillEditor />;
+      data.push(editor);
+      setQuillCollection(data);
+    }
     setToggle(false);
   }
 
   function renderView() {
-    switch(selectedView) {
-      case 'image': 
-        return <img style={{maxWidth: '100%'}} src={Image} alt = "" />
-      case 'text':
-        return <QuillEditor />
-      default:
-        return '';
-    }
+    return <img style={{maxWidth: '100%'}} src={Image} alt = "" />
   }
-  return <div className="">
-    <div className="create-icon-container flex vertical-align">
-      <span className="create-icon" onClick={() => setToggle(!toggle)}>+</span>
-      {
-        toggle &&
-        <CreateContent handleView={handleView} />
-      }
+
+  function renderQuillCollection() {
+    return quillCollection.map((listItem) => {
+      return (
+        <div className='mb-20 ml-20'>
+          {listItem}
+        </div>
+      )
+    })
+  }
+
+  return (
+    <div className="">
+      <div className="create-icon-container flex vertical-align">
+        <span className="create-icon" onClick={() => setToggle(!toggle)}>+</span>
+        {
+          toggle &&
+          <CreateContent handleView={handleView} />
+        }
+      </div>
+        {
+          selectedView === 'image' &&
+          renderView()
+        }
+        {
+          selectedView === 'text' && quillCollection?.length > 0 &&
+          renderQuillCollection()
+        }
     </div>
-      {
-        selectedView &&
-        renderView()
-      }
-  </div>
+  )
 }
